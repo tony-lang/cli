@@ -1,0 +1,3 @@
+import extern { print: puts :: String -> Void } from './external_import.js'
+
+puts('hello world')

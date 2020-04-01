@@ -1,0 +1,12 @@
+0
+2
+86
+Tony
+Hoare
+hello world
+undefined
+2
+1
+hello
+0
+200
