@@ -1,0 +1,4 @@
+abstraction := (x) =>
+  return y := x
+
+print(abstraction(0).to_str)

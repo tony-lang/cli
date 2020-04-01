@@ -1,0 +1,3 @@
+import { n: m } from './export.test.tn'
+
+print(m.to_str)
