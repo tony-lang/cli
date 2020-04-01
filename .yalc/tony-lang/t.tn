@@ -1,0 +1,26 @@
+import extern {
+  print :: String -> Void,
+  to_str :: Number -> String,
+  neg: ! :: Number -> Number,
+  add: + :: Number -> Number -> Number,
+  sub: - :: Number -> Number -> Number,
+  mod: % :: Number -> Number -> Number,
+  concat: ++ :: [Number] -> [Number] -> [Number],
+  leq: <= :: Number -> Number -> Boolean,
+  lt: < :: Number -> Number -> Boolean,
+  geq: >= :: Number -> Number -> Boolean,
+  gt: > :: Number -> Number -> Boolean,
+  eq: == :: Number -> Number -> Boolean
+} from './tmp/stdlib.js'
+
+
+a1 := (a) => print(a.to_str)
+a1(0)
+
+a3 := (a) =>
+  b := (c) =>
+    c
+  b(a)
+print(a3(0).to_str)
+
+(() => print('hello world'))()

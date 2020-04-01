@@ -1,0 +1,47 @@
+{
+  "name": "tony-cli",
+  "version": "1.0.0",
+  "description": "Command line interface for the Tony programming language",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib --extensions .ts",
+    "start": "yarn link && nodemon --watch src --exec 'yarn build' -e ts",
+    "eslint": "eslint src --ext .ts"
+  },
+  "engines": {
+    "node": ">=12.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/tony-lang/cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "Jonas Hübotter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tony-lang/cli/issues"
+  },
+  "homepage": "https://tony-lang.github.io/docs/cli/install",
+  "dependencies": {
+    "commander": "^5.0.0",
+    "tony-lang": "file:.yalc/tony-lang"
+  },
+  "bin": {
+    "tony": "lib/index.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/node": "^13.9.8",
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2",
+    "typescript": "^3.8.3"
+  }
+}
