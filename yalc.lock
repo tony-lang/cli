@@ -1,9 +1,0 @@
-{
-  "version": "v1",
-  "packages": {
-    "tony-lang": {
-      "signature": "33448e3768487278e979048d8ee61ddb",
-      "file": true
-    }
-  }
-}
