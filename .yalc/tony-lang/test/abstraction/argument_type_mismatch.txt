@@ -1,1 +1,0 @@
-ERROR: Non-variable types do not match, when matching 'Number' with 'String'.

@@ -2,9 +2,9 @@
   "name": "tony-cli",
   "version": "1.0.0",
   "description": "Command line interface for the Tony programming language",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "babel src --out-dir lib --extensions .ts",
+    "build": "babel src --out-dir dist --extensions .ts",
     "start": "yarn link && nodemon --watch src --exec 'yarn build' -e ts",
     "eslint": "eslint src --ext .ts"
   },
@@ -29,7 +29,7 @@
     "tony-lang": "file:.yalc/tony-lang"
   },
   "bin": {
-    "tony": "lib/index.js"
+    "tony": "dist/index.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

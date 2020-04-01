@@ -1,3 +1,0 @@
-import { n } from './export.tn'
-
-print(n.to_str)
