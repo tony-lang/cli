@@ -27,6 +27,7 @@ commander
   .command('compile [project]')
   .description('Compile a project to JavaScript')
   .option('-o, --out-file <path>', 'output file')
+  .option('--noEmit', 'do not emit outputs')
   .option(
     '--webpack-mode <mode>',
     'enable production optimizations or development hints\n' +

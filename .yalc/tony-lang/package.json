@@ -1,6 +1,6 @@
 {
   "name": "tony-lang",
-  "version": "0.1.4-33448e37",
+  "version": "0.1.4-e1653ef8",
   "description": "The Tony programming language",
   "main": "dist/src/index.js",
   "types": "tony-lang.d.ts",
