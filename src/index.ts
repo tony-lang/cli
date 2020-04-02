@@ -8,6 +8,10 @@ import CLI from './CLI'
 const cli = new CLI()
 
 commander
+  .storeOptionsAsProperties(false)
+  .passCommandToAction(false)
+
+commander
   .version(`Tony ${VERSION}`, '-v, --version')
   .option('-d, --debug', 'enable debug mode', false)
 
@@ -27,7 +31,7 @@ commander
   .command('compile [project]')
   .description('Compile a project to JavaScript')
   .option('-o, --out-file <path>', 'output file')
-  .option('--noEmit', 'do not emit outputs')
+  .option('--no-emit', 'do not emit outputs')
   .option(
     '--webpack-mode <mode>',
     'enable production optimizations or development hints\n' +
