@@ -34,7 +34,7 @@ export class SyntaxErrorFormatter {
     if (erroneousNode.type !== 'ERROR') {
       console.error(
         `It looks as though you tried to use ${a(erroneousNode.type)}.\n` +
-        `Reference: https://tony-lang.github.io/docs/reference/syntax` +
+        'Reference: https://tony-lang.github.io/docs/reference/syntax' +
         `#${erroneousNode.type}`
       )
     }
