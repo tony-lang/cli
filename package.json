@@ -27,6 +27,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^5.0.0",
+    "indefinite": "^2.3.2",
     "tony-lang": "file:.yalc/tony-lang",
     "tree-sitter": "^0.16.0"
   },
@@ -39,6 +40,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-typescript": "^7.9.0",
+    "@types/indefinite": "^2.3.0",
     "@types/node": "^13.9.8",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",

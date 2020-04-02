@@ -28,30 +28,30 @@ declare module 'tony-lang' {
   export const VERSION: string
 
   export class CompileError extends Error {
-    get context(): Context;
-    get filePath(): string;
+    get context(): Context
+    get filePath(): string
   }
 
   export class DuplicateBindingError extends CompileError {
-    get binding(): string;
+    get binding(): string
   }
 
   export class InternalError extends Error {
-    get context(): string;
+    get context(): string
   }
 
   export class MissingBindingError extends CompileError {
-    get binding(): string;
-    get representation(): string;
-    get type(): string;
+    get binding(): string
+    get representation(): string
+    get type(): string
   }
 
   export class SyntaxError extends Error {
-    get filePath(): string;
-    get tree(): Parser.Tree;
+    get filePath(): string
+    get tree(): Parser.Tree
   }
 
   export class TypeError extends CompileError {
-    get typeTrace(): TypeMismatch[];
+    get typeTrace(): TypeMismatch[]
   }
 }

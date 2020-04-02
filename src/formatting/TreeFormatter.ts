@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import Parser from 'tree-sitter'
 
-const INDENT = '  '
+const INDENT = Object.freeze('  ')
 
 export class TreeFormatter {
   perform = (node: Parser.SyntaxNode, depth = 0): string => {
@@ -10,11 +10,11 @@ export class TreeFormatter {
     const combinedChildren =
       children.length > 0 ? `\n${children.join('\n')}` : ''
 
-    return `${this.printDepth(depth)}${chalk.black('(')}` +
-           `${this.printNode(node)}${combinedChildren}${chalk.black(')')}`
+    return `${this.depthToString(depth)}${chalk.black('(')}` +
+           `${this.nodeToString(node)}${combinedChildren}${chalk.black(')')}`
   }
 
-  private printNode = (node: Parser.SyntaxNode): string => {
+  private nodeToString = (node: Parser.SyntaxNode): string => {
     const type = node.hasError() || node.isMissing() ?
       chalk.bold.redBright(node.type) : node.type
     const position = chalk.gray(
@@ -25,5 +25,5 @@ export class TreeFormatter {
     return `${type} ${position}`
   }
 
-  private printDepth = (depth: number): string => INDENT.repeat(depth)
+  private depthToString = (depth: number): string => INDENT.repeat(depth)
 }
