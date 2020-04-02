@@ -10,8 +10,8 @@ export class TreeFormatter {
     const combinedChildren =
       children.length > 0 ? `\n${children.join('\n')}` : ''
 
-    return `${this.printDepth(depth)}${chalk.black('(')}${this.printNode(node)}` +
-           `${combinedChildren}${chalk.black(')')}`
+    return `${this.printDepth(depth)}${chalk.black('(')}` +
+           `${this.printNode(node)}${combinedChildren}${chalk.black(')')}`
   }
 
   private printNode = (node: Parser.SyntaxNode): string => {
