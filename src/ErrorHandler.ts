@@ -1,13 +1,12 @@
-import chalk from 'chalk'
 import * as Tony from 'tony-lang'
-
 import {
   DuplicateBindingErrorFormatter,
   InternalErrorFormatter,
   MissingBindingErrorFormatter,
   SyntaxErrorFormatter,
-  TypeErrorFormatter
+  TypeErrorFormatter,
 } from './formatting'
+import chalk from 'chalk'
 
 export class ErrorHandler {
   perform = async (error: Error): Promise<void> => {
@@ -22,7 +21,6 @@ export class ErrorHandler {
       return new MissingBindingErrorFormatter().perform(error)
     else if (error instanceof Tony.TypeError)
       return new TypeErrorFormatter().perform(error)
-    else
-      console.error(error.message)
+    else console.error(error.message)
   }
 }

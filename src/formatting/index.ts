@@ -1,6 +1,4 @@
-export {
-  DuplicateBindingErrorFormatter
-} from './DuplicateBindingErrorFormatter'
+export { DuplicateBindingErrorFormatter } from './DuplicateBindingErrorFormatter'
 export { InternalErrorFormatter } from './InternalErrorFormatter'
 export { MissingBindingErrorFormatter } from './MissingBindingErrorFormatter'
 export { SyntaxErrorFormatter } from './SyntaxErrorFormatter'
