@@ -2,6 +2,7 @@ import path from 'path'
 import * as Tony from 'tony-lang'
 
 import { TreeFormatter } from './formatting'
+import { ErrorHandler } from './ErrorHandler'
 
 export default class CLI {
   debug = false
@@ -21,7 +22,7 @@ export default class CLI {
   ): void => {
     Tony.compile(project, { outFile, webpackMode, verbose: this.debug })
       .then(entryPath => Tony.exec(entryPath, args, { verbose: this.debug }))
-      .catch(error => console.error(error.message))
+      .catch(error => new ErrorHandler().perform(error))
   }
 
   compile = (
@@ -39,21 +40,17 @@ export default class CLI {
         if (emit)
           console.log(`Your built project can be found here: ${entryPath}`)
       })
-      .catch(error => console.error(error.message))
+      .catch(error => new ErrorHandler().perform(error))
   }
 
   exec = (file: string, args: string[]): void => {
     Tony.exec(path.join(process.cwd(), file), args, { verbose: this.debug })
-      .catch(error => console.error(error.message))
+      .catch(error => new ErrorHandler().perform(error))
   }
 
   parse = (file: string): void => {
     Tony.parse(file, { verbose: this.debug })
       .then(tree => console.log(new TreeFormatter().perform(tree.rootNode)))
-      .catch(error => {
-        if (error instanceof Tony.SyntaxError)
-          console.error(new TreeFormatter().perform(error.tree.rootNode))
-        else console.error(error.message)
-      })
+      .catch(error => new ErrorHandler().perform(error))
   }
 }
