@@ -24,15 +24,18 @@ export default class CLI {
 
   compile = (
     project: string,
-    { outFile, webpackMode }: {
+    { outFile, noEmit, webpackMode }: {
       outFile: string;
+      noEmit: boolean;
       webpackMode: string;
     }
   ): void => {
-    Tony.compile(project, { outFile, webpackMode, verbose: this.debug })
+    Tony.compile(project, { outFile, noEmit, webpackMode, verbose: this.debug })
       .then(entryPath => {
-        console.log('Compilation was successful! Your built project can be ' +
-                    `found here: ${entryPath}`)
+        console.log('Done!')
+
+        if (!noEmit)
+          console.log(`Your built project can be found here: ${entryPath}`)
       })
       .catch(error => console.error(error.message))
   }

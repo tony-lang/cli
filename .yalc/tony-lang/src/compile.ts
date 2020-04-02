@@ -1,5 +1,3 @@
-import childProcess from 'child_process'
-import path from 'path'
 import Parser from 'tree-sitter'
 
 import { Analyze, SymbolTable } from './analyzing'
@@ -7,16 +5,17 @@ import { GenerateCode } from './code_generation'
 import { FILE_EXTENSION } from './constants'
 import { parse } from './parse'
 import {
-  assert,
   getFilePath,
   getOutFile,
   writeFile
 } from './utilities'
+import { compile as webpackCompile } from './webpack'
 
 export const compile = async (
   file: string,
-  { outFile, webpackMode = 'production', verbose = false }: {
+  { outFile, noEmit = false, webpackMode = 'production', verbose = false }: {
     outFile?: string;
+    noEmit?: boolean;
     webpackMode?: string;
     verbose?: boolean;
   }
@@ -32,25 +31,23 @@ export const compile = async (
     const file = files.pop()
     if (compiledFiles.includes(file) || !file.includes(FILE_EXTENSION)) continue
 
-    await compileFile(files, file, verbose).catch(error => { throw error })
+    const [tree, symbolTable] = await analyzeFile(files, file, verbose)
+    if (!noEmit) await compileFile(file, tree, symbolTable, verbose)
     compiledFiles.push(file)
   }
 
+  if (noEmit) return
+
   await webpackCompile(outFilePath, webpackMode, verbose)
-    .catch(error => { throw error })
   return outFilePath
 }
 
-const compileFile = (
+const analyzeFile = (
   files: string[],
   filePath: string,
   verbose: boolean
-): Promise<void> => parse(filePath, { verbose })
+): Promise<[Parser.Tree, SymbolTable]> => parse(filePath, { verbose })
   .then(tree => analyze(files, filePath, tree, verbose))
-  .then(([tree, symbolTable]) =>
-    generateCode(filePath, tree, symbolTable, verbose)
-  )
-  .then(source => writeFile(getOutFile(filePath), source))
 
 const analyze = (
   files: string[],
@@ -66,6 +63,17 @@ const analyze = (
   return [tree, symbolTable]
 }
 
+const compileFile = (
+  filePath: string,
+  tree: Parser.Tree,
+  symbolTable: SymbolTable,
+  verbose: boolean
+): Promise<void> => {
+  const source = generateCode(filePath, tree, symbolTable, verbose)
+
+  return writeFile(getOutFile(filePath), source)
+}
+
 const generateCode = (
   filePath: string,
   tree: Parser.Tree,
@@ -75,31 +83,4 @@ const generateCode = (
   if (verbose) console.log(`Generating code for ${filePath}...`)
 
   return new GenerateCode(symbolTable).generate(tree.rootNode)
-}
-
-const webpackCompile = (
-  filePath: string,
-  mode: string,
-  verbose: boolean
-): Promise<void> => {
-  if (verbose) console.log('Compiling with Webpack...')
-
-  return new Promise(resolve => {
-    childProcess
-      .spawn(
-        path.join(__dirname, '..', '..', 'node_modules', '.bin', 'webpack-cli'),
-        [filePath, '-o', filePath, '--mode', mode],
-        { stdio: verbose ? 'inherit' : null }
-      )
-      .on('close', resolve)
-      .on('error', (error) => {
-        assert(
-          false,
-          `${error.name}: ${error.message}\n\n` +
-          `Oh noes! Tony wasn't able to compile ${filePath}.\nPlease report ` +
-          'the file you tried to compile as well as the printed output at ' +
-          'https://github.com/tony-lang/tony/issues'
-        )
-      })
-  })
 }
