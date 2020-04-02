@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 
-import commander from 'commander'
-import { VERSION } from 'tony-lang'
-
 import CLI from './CLI'
+import { VERSION } from 'tony-lang'
+import commander from 'commander'
 
 const cli = new CLI()
 
-commander
-  .storeOptionsAsProperties(false)
-  .passCommandToAction(false)
+commander.storeOptionsAsProperties(false).passCommandToAction(false)
 
 commander
   .version(`Tony ${VERSION}`, '-v, --version')
@@ -23,7 +20,7 @@ commander
     '--webpack-mode <mode>',
     'enable production optimizations or development hints\n' +
       '[choices: "development", "production", "none"]',
-    'production'
+    'production',
   )
   .action(cli.run)
 
@@ -36,7 +33,7 @@ commander
     '--webpack-mode <mode>',
     'enable production optimizations or development hints\n' +
       '[choices: "development", "production", "none"]',
-    'production'
+    'production',
   )
   .action(cli.compile)
 
@@ -50,7 +47,6 @@ commander
   .description('Print the abstract syntax tree of a file')
   .action(cli.parse)
 
-commander
-  .parse(process.argv)
+commander.parse(process.argv)
 
 if (commander.debug) cli.enableDebugMode()
