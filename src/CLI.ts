@@ -28,9 +28,10 @@ export default class CLI {
       verbose: this.debug,
     })
       .then((entryPath) => {
-        if (entryPath === undefined) throw new Tony.InternalError(
-          'entryPath should only be undefined when no emit is false.'
-        )
+        if (entryPath === undefined)
+          throw new Tony.InternalError(
+            'entryPath should only be undefined when no emit is false.',
+          )
 
         return Tony.exec(entryPath, args, { verbose: this.debug })
       })
