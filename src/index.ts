@@ -4,7 +4,7 @@ import CLI from './CLI'
 import { VERSION } from 'tony-lang'
 import commander from 'commander'
 
-const cli = new CLI()
+const cli = new CLI(commander)
 
 commander.storeOptionsAsProperties(false).passCommandToAction(false)
 
@@ -47,6 +47,4 @@ commander
   .description('Print the abstract syntax tree of a file')
   .action(cli.parse)
 
-commander.parse(process.argv)
-
-if (commander.debug) cli.enableDebugMode()
+commander.parseAsync(process.argv)

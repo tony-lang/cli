@@ -20,15 +20,12 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    indent: ['error', 2, {
-      SwitchCase: 1,
+    'max-lines-per-function': ['error', {
+      max: 20,
+      skipBlankLines: true,
+      skipComments: true,
     }],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single', {
-      avoidEscape: true
-    }],
-    semi: ['error', 'never'],
-    'max-len': 'error',
+    'max-params': ['error', 5],
     'sort-imports': 'error',
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/no-use-before-define': 'off',
@@ -51,7 +48,7 @@ module.exports = {
       },
     },
     {
-      files: ['src/code_generation/ResolvePattern.ts'],
+      files: ['src/code_generation/services/ResolvePattern.ts'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'warn',
       },

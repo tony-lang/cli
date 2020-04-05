@@ -5023,7 +5023,7 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     safe-regex "^1.1.0"
 
 "tony-lang@file:.yalc/tony-lang":
-  version "0.1.4-644e26d5"
+  version "0.1.4-219cb4b7"
   dependencies:
     core-js "^3.6.4"
     deep-equal "^2.0.1"

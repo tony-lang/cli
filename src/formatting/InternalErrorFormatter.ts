@@ -3,8 +3,6 @@ import chalk from 'chalk'
 
 export class InternalErrorFormatter {
   perform = async (error: InternalError): Promise<void> => {
-    if (error.context) console.error(`\n${error.context}`)
-
     console.error(
       `\n${chalk.bold.whiteBright(error.message)}\n\n` +
         "[500] Oh noes! Some of Tony's insides just turned upside down.\n" +

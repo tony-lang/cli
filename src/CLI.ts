@@ -1,17 +1,22 @@
 import * as Tony from 'tony-lang'
+import { CommanderStatic } from 'commander'
 import { ErrorHandler } from './ErrorHandler'
 import { TreeFormatter } from './formatting'
 import path from 'path'
 
 export default class CLI {
-  debug = false
+  private _commander: CommanderStatic
 
-  enableDebugMode = (): void => {
-    this.debug = true
-    console.log('Running Tony in debug mode...')
+  constructor(commander: CommanderStatic) {
+    this._commander = commander
   }
 
-  run = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private get options(): { [key: string]: any } {
+    return this._commander.opts()
+  }
+
+  run = async (
     project: string,
     args: string[],
     {
@@ -21,11 +26,11 @@ export default class CLI {
       outFile: string
       webpackMode: string
     },
-  ): void => {
-    Tony.compile(project, {
+  ): Promise<void> => {
+    await Tony.compile(project, {
       outFile,
       webpackMode,
-      verbose: this.debug,
+      verbose: this.options.debug,
     })
       .then((entryPath) => {
         if (entryPath === undefined)
@@ -33,12 +38,12 @@ export default class CLI {
             'entryPath should only be undefined when no emit is false.',
           )
 
-        return Tony.exec(entryPath, args, { verbose: this.debug })
+        return Tony.exec(entryPath, args, { verbose: this.options.debug })
       })
       .catch((error) => new ErrorHandler().perform(error))
   }
 
-  compile = (
+  compile = async (
     project: string,
     {
       outFile,
@@ -49,12 +54,12 @@ export default class CLI {
       emit: boolean
       webpackMode: string
     },
-  ): void => {
-    Tony.compile(project, {
+  ): Promise<void> => {
+    await Tony.compile(project, {
       outFile,
       emit,
       webpackMode,
-      verbose: this.debug,
+      verbose: this.options.debug,
     })
       .then((entryPath) => {
         console.log('Done!')
@@ -65,14 +70,14 @@ export default class CLI {
       .catch((error) => new ErrorHandler().perform(error))
   }
 
-  exec = (file: string, args: string[]): void => {
-    Tony.exec(path.join(process.cwd(), file), args, {
-      verbose: this.debug,
+  exec = async (file: string, args: string[]): Promise<void> => {
+    await Tony.exec(path.join(process.cwd(), file), args, {
+      verbose: this.options.debug,
     }).catch((error) => new ErrorHandler().perform(error))
   }
 
-  parse = (file: string): void => {
-    Tony.parse(file, { verbose: this.debug })
+  parse = async (file: string): Promise<void> => {
+    await Tony.parse(file, { verbose: this.options.debug })
       .then((tree) => console.log(new TreeFormatter().perform(tree.rootNode)))
       .catch((error) => new ErrorHandler().perform(error))
   }
