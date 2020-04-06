@@ -1,8 +1,5 @@
-import {
-  DESTRUCTURING_PATTERN_NODE_TYPES,
-  NODE_TYPES_WITH_DEFAULT_VALUES,
-} from '../../constants'
 import { GenerateCode } from '../GenerateCode'
+import { NODE_TYPES_WITH_DEFAULT_VALUES } from '../../constants'
 import Parser from 'tree-sitter'
 
 export class CollectDefaultValues {
@@ -15,16 +12,12 @@ export class CollectDefaultValues {
   perform = (node: Parser.SyntaxNode): string => `[${this.rec(node).join(',')}]`
 
   rec = (node: Parser.SyntaxNode): (string | undefined)[] => {
+    // prettier-ignore
     if (NODE_TYPES_WITH_DEFAULT_VALUES.includes(node.type))
-      if (node.namedChildCount == 2)
-        return [this.codeGenerator.traverse(node.namedChild(1)!)]
-      else if (
-        DESTRUCTURING_PATTERN_NODE_TYPES.includes(node.namedChild(0)!.type)
-      )
-        return this.rec(node.namedChild(0)!)
-      else if (node.namedChild(0)!.type === 'identifier_pattern')
-        return [undefined]
-      else return []
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      if (node.defaultNode) return [this.codeGenerator.traverse(node.defaultNode)]
+      else return [undefined]
     else
       return node.namedChildren
         .map(this.rec)
