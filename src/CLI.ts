@@ -17,7 +17,7 @@ export default class CLI {
   }
 
   run = async (
-    project: string,
+    file: string,
     args: string[],
     {
       outFile,
@@ -27,7 +27,7 @@ export default class CLI {
       webpackMode: string
     },
   ): Promise<void> => {
-    await Tony.compile(project, {
+    await Tony.compile(file, {
       outFile,
       webpackMode,
       verbose: this.options.debug,
@@ -44,7 +44,7 @@ export default class CLI {
   }
 
   compile = async (
-    project: string,
+    file: string,
     {
       outFile,
       emit,
@@ -55,7 +55,7 @@ export default class CLI {
       webpackMode: string
     },
   ): Promise<void> => {
-    await Tony.compile(project, {
+    await Tony.compile(file, {
       outFile,
       emit,
       webpackMode,
@@ -65,7 +65,7 @@ export default class CLI {
         console.log('Done!')
 
         if (emit)
-          console.log(`Your built project can be found here: ${entryPath}`)
+          console.log(`Your compiled file can be found here: ${entryPath}`)
       })
       .catch((error) => new ErrorHandler().perform(error))
   }

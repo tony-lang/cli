@@ -13,8 +13,8 @@ commander
   .option('-d, --debug', 'enable debug mode', false)
 
 commander
-  .command('run [project] [args...]')
-  .description('Run a project')
+  .command('run <file> [args...]')
+  .description('Compile and execute a file')
   .option('-o, --out-file <path>', 'output file')
   .option(
     '--webpack-mode <mode>',
@@ -25,8 +25,8 @@ commander
   .action(cli.run)
 
 commander
-  .command('compile [project]')
-  .description('Compile a project to JavaScript')
+  .command('compile <file>')
+  .description('Compile a file to JavaScript')
   .option('-o, --out-file <path>', 'output file')
   .option('--no-emit', 'do not emit outputs')
   .option(
