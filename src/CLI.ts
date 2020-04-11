@@ -48,16 +48,19 @@ export default class CLI {
     {
       outFile,
       emit,
+      webpack,
       webpackMode,
     }: {
       outFile: string
       emit: boolean
+      webpack: boolean
       webpackMode: string
     },
   ): Promise<void> => {
     await Tony.compile(project, {
       outFile,
       emit,
+      webpack,
       webpackMode,
       verbose: this.options.debug,
     })
