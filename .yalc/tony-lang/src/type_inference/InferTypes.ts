@@ -34,7 +34,7 @@ import {
   InferListType,
   InferMapType,
   InferPatternBindingTypes,
-  InferSpreadType,
+  InferTupleType,
 } from './services'
 import Parser from 'tree-sitter'
 import { isNotUndefined } from '../utilities'
@@ -148,6 +148,8 @@ export class InferTypes {
           return this.handleSpreadList(node)
         case 'spread_map':
           return this.handleSpreadMap(node)
+        case 'spread_tuple':
+          return this.handleSpreadTuple(node)
         case 'string':
           return this.handleString(node)
         case 'tuple':
@@ -363,11 +365,9 @@ export class InferTypes {
   }
 
   private handleList = (node: Parser.SyntaxNode): ParametricType => {
-    const valueTypes = node.namedChildren
-      .map((child) => this.traverse(child))
-      .filter(isNotUndefined)
-
-    return new InferListType(this._typeConstraints).perform(valueTypes)
+    return new InferListType(this, this._typeConstraints).perform(
+      node.namedChildren,
+    )
   }
 
   private handleListComprehension = (
@@ -406,9 +406,10 @@ export class InferTypes {
       this,
       this._walkFileModuleScope.scope,
       this._typeConstraints,
-    ).performParameters(node)
+    ).perform(node)
+    assert(parameterTypes instanceof ParametricType, 'Should be tuple type.')
 
-    return parameterTypes
+    return new CurriedType(parameterTypes.parameters)
   }
 
   private handlePatternList = (node: Parser.SyntaxNode): undefined => {
@@ -455,8 +456,16 @@ export class InferTypes {
   private handleShorthandPairIdentifier = (
     node: Parser.SyntaxNode,
   ): ParametricType => {
+    const name = node.text
+    const binding = this._walkFileModuleScope.scope.resolveBinding(name)
+
+    assert(
+      binding instanceof IdentifierBinding,
+      'Identifier binding should be found in scope.',
+    )
+
     const keyType = new ParametricType(STRING_TYPE)
-    const valueType = this.traverse(node.namedChild(0)!)!
+    const valueType = binding.type
 
     return new ParametricType(MAP_TYPE, [keyType, valueType])
   }
@@ -464,13 +473,31 @@ export class InferTypes {
   private handleSpreadList = (node: Parser.SyntaxNode): Type => {
     const valueType = this.traverse(node.namedChild(0)!)!
 
-    return new InferSpreadType().perform(valueType)
+    return new ParametricType(LIST_TYPE).unify(
+      valueType,
+      this._typeConstraints,
+      true,
+    )
   }
 
   private handleSpreadMap = (node: Parser.SyntaxNode): Type => {
     const valueType = this.traverse(node.namedChild(0)!)!
 
-    return new InferSpreadType().perform(valueType)
+    return new ParametricType(MAP_TYPE, []).unify(
+      valueType,
+      this._typeConstraints,
+      true,
+    )
+  }
+
+  private handleSpreadTuple = (node: Parser.SyntaxNode): Type => {
+    const valueType = this.traverse(node.namedChild(0)!)!
+
+    return new ParametricType(TUPLE_TYPE, []).unify(
+      valueType,
+      this._typeConstraints,
+      true,
+    )
   }
 
   private handleString = (node: Parser.SyntaxNode): ParametricType => {
@@ -480,11 +507,9 @@ export class InferTypes {
   }
 
   private handleTuple = (node: Parser.SyntaxNode): ParametricType => {
-    const valueTypes = node.namedChildren
-      .map((child) => this.traverse(child))
-      .filter(isNotUndefined)
-
-    return new ParametricType(TUPLE_TYPE, valueTypes)
+    return new InferTupleType(this, this._typeConstraints).perform(
+      node.namedChildren,
+    )
   }
 
   private handleType = (node: Parser.SyntaxNode): Type => {
