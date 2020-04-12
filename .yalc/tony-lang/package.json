@@ -1,6 +1,6 @@
 {
   "name": "tony-lang",
-  "version": "0.1.4-3ee25321",
+  "version": "0.1.4-afbd7cb8",
   "description": "The Tony programming language",
   "main": "dist/src/index.js",
   "types": "tony-lang.d.ts",
@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/tony-lang/tony#readme",
   "dependencies": {
-    "core-js": "^3.6.4",
+    "core-js": "^3.6.5",
     "deep-equal": "^2.0.1",
     "inquirer": "^7.1.0",
     "mkdirp": "^1.0.3",
     "outdent": "^0.7.1",
     "tree-sitter": "^0.16.1",
-    "tree-sitter-tony": "0.2.0-alpha.11",
+    "tree-sitter-tony": "0.2.0-alpha.12",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
   }

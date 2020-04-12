@@ -25,13 +25,16 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/member-delimiter-style': ['error', {
-      multiline: {
-        delimiter: 'none',
+    '@typescript-eslint/member-delimiter-style': [
+      'error',
+      {
+        multiline: {
+          delimiter: 'none',
+        },
+        singleline: {
+          delimiter: 'semi',
+        },
       },
-      singleline: {
-        delimiter: 'semi',
-      }
-    }],
-  }
+    ],
+  },
 }

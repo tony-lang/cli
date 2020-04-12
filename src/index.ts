@@ -29,6 +29,7 @@ commander
   .description('Compile a file to JavaScript')
   .option('-o, --out-file <path>', 'output file')
   .option('--no-emit', 'do not emit outputs')
+  .option('--no-webpack', 'do not combine and minify outputs with Webpack')
   .option(
     '--webpack-mode <mode>',
     'enable production optimizations or development hints\n' +

@@ -6,8 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir dist --extensions .ts",
     "start": "yarn link && nodemon --watch src --exec 'yarn build' -e ts",
-    "lint": "prettier --check src && eslint src --ext .ts",
-    "prettier": "prettier --write src"
+    "lint": "prettier --check '**/*.{ts,js}' && eslint src --ext .ts",
+    "prettier": "prettier --write '**/*.{ts,js}'"
   },
   "engines": {
     "node": ">=12.0"
