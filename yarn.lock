@@ -1785,7 +1785,7 @@ core-js-compat@^3.6.2:
     browserslist "^4.8.3"
     semver "7.0.0"
 
-core-js@^3.6.5:
+core-js@^3.6.4:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
@@ -5064,9 +5064,9 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     safe-regex "^1.1.0"
 
 "tony-lang@file:.yalc/tony-lang":
-  version "0.1.4-afbd7cb8"
+  version "0.1.4-698841e7"
   dependencies:
-    core-js "^3.6.5"
+    core-js "^3.6.4"
     deep-equal "^2.0.1"
     inquirer "^7.1.0"
     mkdirp "^1.0.3"

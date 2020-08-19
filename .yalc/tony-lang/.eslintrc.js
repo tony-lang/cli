@@ -20,25 +20,31 @@ module.exports = {
   },
   plugins: ['@typescript-eslint'],
   rules: {
-    'max-lines-per-function': ['error', {
-      max: 20,
-      skipBlankLines: true,
-      skipComments: true,
-    }],
+    'max-lines-per-function': [
+      'error',
+      {
+        max: 25,
+        skipBlankLines: true,
+        skipComments: true,
+      },
+    ],
     'max-params': ['error', 5],
     'sort-imports': 'error',
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/no-use-before-define': 'off',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/member-delimiter-style': ['error', {
-      multiline: {
-        delimiter: 'none',
+    '@typescript-eslint/member-delimiter-style': [
+      'error',
+      {
+        multiline: {
+          delimiter: 'none',
+        },
+        singleline: {
+          delimiter: 'semi',
+        },
       },
-      singleline: {
-        delimiter: 'semi',
-      }
-    }],
+    ],
   },
   overrides: [
     {

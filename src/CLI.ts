@@ -40,7 +40,7 @@ export default class CLI {
 
         return Tony.exec(entryPath, args, { verbose: this.options.debug })
       })
-      .catch((error) => new ErrorHandler().perform(error))
+      .catch((error) => new ErrorHandler(this.options.debug).perform(error))
   }
 
   compile = async (
@@ -70,18 +70,18 @@ export default class CLI {
         if (emit)
           console.log(`Your compiled file can be found here: ${entryPath}`)
       })
-      .catch((error) => new ErrorHandler().perform(error))
+      .catch((error) => new ErrorHandler(this.options.debug).perform(error))
   }
 
   exec = async (file: string, args: string[]): Promise<void> => {
     await Tony.exec(path.join(process.cwd(), file), args, {
       verbose: this.options.debug,
-    }).catch((error) => new ErrorHandler().perform(error))
+    }).catch((error) => new ErrorHandler(this.options.debug).perform(error))
   }
 
   parse = async (file: string): Promise<void> => {
     await Tony.parse(file, { verbose: this.options.debug })
       .then((tree) => console.log(new TreeFormatter().perform(tree.rootNode)))
-      .catch((error) => new ErrorHandler().perform(error))
+      .catch((error) => new ErrorHandler(this.options.debug).perform(error))
   }
 }

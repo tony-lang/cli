@@ -5,21 +5,24 @@ import chalk from 'chalk'
 export class TypeErrorFormatter {
   perform = async (error: TypeError): Promise<void> => {
     console.error(
-      'Types could not be unified.\n\n' +
-        `${chalk.bold.whiteBright(error.message)}\n\nUnification trace:`,
+      'Type unification resulted in an empty type disjunction.\n\nUnification trace:',
     )
 
-    error.typeTrace.forEach(([expected, actual]) => {
-      if (actual)
-        console.error(
-          `${chalk.gray('- expected')} ${chalk.whiteBright(
-            expected,
-          )}\n       ` + `${chalk.gray('got')} ${chalk.whiteBright(actual)}`,
-        )
-      else
-        console.error(
-          `${chalk.gray('-')}          ${chalk.whiteBright(expected)}`,
-        )
+    error.trace.forEach((internalTypeError) => {
+      console.error(chalk.bold.whiteBright(internalTypeError.message))
+
+      internalTypeError.trace.forEach(([expected, actual]) => {
+        if (actual)
+          console.error(
+            `${chalk.gray('- expected')} ${chalk.whiteBright(
+              expected,
+            )}\n       ` + `${chalk.gray('got')} ${chalk.whiteBright(actual)}`,
+          )
+        else
+          console.error(
+            `${chalk.gray('-')}          ${chalk.whiteBright(expected)}`,
+          )
+      })
     })
 
     if (error.filePath && error.context) {

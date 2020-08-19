@@ -1,0 +1,30 @@
+import {
+  print :: String -> Void,
+  to_str :: Number -> String,
+  neg: ! :: Number -> Number,
+  add: + :: Number -> Number -> Number,
+  sub: - :: Number -> Number -> Number,
+  mod: % :: Number -> Number -> Number,
+  concat: + :: [Number] -> [Number] -> [Number],
+  leq: <= :: Number -> Number -> Boolean,
+  lt: < :: Number -> Number -> Boolean,
+  geq: >= :: Number -> Number -> Boolean,
+  gt: > :: Number -> Number -> Boolean,
+  eq: == :: Number -> Number -> Boolean
+} from '../tony/dist/test/stdlib.js'
+
+
+quicksort :=
+  ([]) => []
+  ([pivot, ...rest]) =>
+    l := quicksort([n | n in rest if n <= pivot])
+    r := quicksort([n | n in rest if n > pivot])
+    l + [pivot] + r
+
+list := quicksort([5, 7, 2, 0, 4, 3])
+print(list[0].to_str)
+print(list[1].to_str)
+print(list[2].to_str)
+print(list[3].to_str)
+print(list[4].to_str)
+print(list[5].to_str)
