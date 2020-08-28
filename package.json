@@ -27,7 +27,7 @@
   "homepage": "https://tony-lang.github.io/docs/cli/install",
   "dependencies": {
     "chalk": "^4.1.0",
-    "commander": "^6.0.0",
+    "commander": "^6.1.0",
     "indefinite": "^2.3.2",
     "tony-lang": "file:.yalc/tony-lang",
     "tree-sitter": "^0.16.2"
