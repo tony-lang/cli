@@ -3001,10 +3001,10 @@ imurmurhash@^0.1.4:
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
-indefinite@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/indefinite/-/indefinite-2.3.2.tgz#e3c5163ae60c2b810b3b5ffc57e8d57c52859d55"
-  integrity sha512-+RqxIRGrhBOfV8KONFaAuNvx1pg6Qh+Ge9w+15TI2LRfVu3aSf5bj9w3OU2GT3k8H13/7Q+C9+pek0jjYby3ZA==
+indefinite@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/indefinite/-/indefinite-2.4.1.tgz#6970cfdd373dde4e394dd5f783e59a7c0fb13637"
+  integrity sha512-4C1k983crWkOu4tfmx8by1jQ0xBLBo0EhNV1WsRem2y+IbzLmPkYycjrQe399heo3bZ5OYpImQo2o85vQ0HkSQ==
 
 infer-owner@^1.0.3:
   version "1.0.4"

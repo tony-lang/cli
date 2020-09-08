@@ -28,7 +28,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^6.1.0",
-    "indefinite": "^2.3.2",
+    "indefinite": "^2.4.1",
     "tony-lang": "file:.yalc/tony-lang",
     "tree-sitter": "^0.16.2"
   },
