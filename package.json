@@ -39,7 +39,7 @@
     "@babel/cli": "^7.12.8",
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-env": "^7.12.10",
     "@babel/preset-typescript": "^7.12.7",
     "@types/indefinite": "^2.3.0",
     "@types/node": "^14.14.11",
