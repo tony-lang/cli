@@ -30,7 +30,7 @@
     "commander": "^6.2.1",
     "indefinite": "^2.4.1",
     "tony-lang": "file:.yalc/tony-lang",
-    "tree-sitter": "^0.16.2"
+    "tree-sitter": "^0.19.0"
   },
   "bin": {
     "tony": "dist/index.js"
