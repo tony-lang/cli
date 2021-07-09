@@ -1000,10 +1000,10 @@
   resolved "https://registry.yarnpkg.com/@types/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#1ee30d79544ca84d68d4b3cdb0af4f205663dd2d"
   integrity sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==
 
-"@types/indefinite@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@types/indefinite/-/indefinite-2.3.0.tgz#a01558845cd8bf759c5564b9d762b0806432742d"
-  integrity sha512-vUbzBClWsKK3ET0bk8P3AaFaSpAObT3FeQqJcAM1tl6QSjDvK1si2Ky26hz4igRfu3l78nna9GXdVIxEpX9M+w==
+"@types/indefinite@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@types/indefinite/-/indefinite-2.3.1.tgz#1cb2eb6f7add399a30971c2569776190980733af"
+  integrity sha512-rRQndOl5JIImsT8iQLdMIcJ/+APtqZ9Gt2FztFiPtVHiSePDDbsWAR+2k7TEVq+a5s/trDzKtV/RmaW+/FVgTw==
 
 "@types/json-schema@^7.0.3":
   version "7.0.4"
