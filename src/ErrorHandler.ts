@@ -5,7 +5,7 @@ import {
   ExportOutsideModuleScopeErrorFormatter,
   ImportOutsideFileModuleScopeErrorFormatter,
   InternalErrorFormatter,
-  InvalidPropertyAccessErrorFormatter,
+  InvalidModuleAccessErrorFormatter,
   MissingBindingErrorFormatter,
   SyntaxErrorFormatter,
   TypeErrorFormatter,
@@ -14,6 +14,12 @@ import {
 import chalk from 'chalk'
 
 export class ErrorHandler {
+  private _verbose: boolean
+
+  constructor(verbose: boolean) {
+    this._verbose = verbose
+  }
+
   perform = async (error: Error): Promise<void> => {
     console.error(
       `${chalk.gray(error.stack)}\n\n${chalk.bold.underline.redBright(
@@ -33,14 +39,16 @@ export class ErrorHandler {
       await new ExportOutsideModuleScopeErrorFormatter().perform(error)
     else if (error instanceof Tony.ImportOutsideFileModuleScopeError)
       await new ImportOutsideFileModuleScopeErrorFormatter().perform(error)
-    else if (error instanceof Tony.InvalidPropertyAccessError)
-      await new InvalidPropertyAccessErrorFormatter().perform(error)
+    else if (error instanceof Tony.InvalidModuleAccessError)
+      await new InvalidModuleAccessErrorFormatter().perform(error)
     else if (error instanceof Tony.MissingBindingError)
-      return new MissingBindingErrorFormatter().perform(error)
+      await new MissingBindingErrorFormatter().perform(error)
     else if (error instanceof Tony.TypeError)
-      return new TypeErrorFormatter().perform(error)
+      await new TypeErrorFormatter().perform(error)
     else if (error instanceof Tony.UnknownImportError)
       await new UnknownImportErrorFormatter().perform(error)
     else console.error(error.message)
+
+    if (this._verbose) console.error(error)
   }
 }

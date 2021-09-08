@@ -1,14 +1,14 @@
 {
   "name": "tony-lang",
-  "version": "0.1.4-afbd7cb8",
+  "version": "0.1.4-dae48e8c",
   "description": "The Tony programming language",
   "main": "dist/src/index.js",
   "types": "tony-lang.d.ts",
   "scripts": {
     "build": "babel . --ignore dist,node_modules --out-dir dist --extensions .ts",
     "start": "nodemon --watch src --watch test --exec 'yarn build' -e ts",
-    "lint": "prettier --check src test && eslint src test --ext .ts",
-    "prettier": "prettier --write src test",
+    "lint": "prettier --check '**/*.{ts,js}' && eslint src test --ext .ts",
+    "prettier": "prettier --write '**/*.{ts,js}'",
     "test": "ava dist/test/index.test.js"
   },
   "engines": {
@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/tony-lang/tony#readme",
   "dependencies": {
-    "core-js": "^3.6.5",
+    "core-js": "^3.6.4",
     "deep-equal": "^2.0.1",
     "inquirer": "^7.1.0",
     "mkdirp": "^1.0.3",

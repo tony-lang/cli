@@ -3,7 +3,7 @@ export { DuplicateBindingErrorFormatter } from './DuplicateBindingErrorFormatter
 export { ExportOutsideModuleScopeErrorFormatter } from './ExportOutsideModuleScopeErrorFormatter'
 export { ImportOutsideFileModuleScopeErrorFormatter } from './ImportOutsideFileModuleScopeErrorFormatter'
 export { InternalErrorFormatter } from './InternalErrorFormatter'
-export { InvalidPropertyAccessErrorFormatter } from './InvalidPropertyAccessErrorFormatter'
+export { InvalidModuleAccessErrorFormatter } from './InvalidModuleAccessErrorFormatter'
 export { MissingBindingErrorFormatter } from './MissingBindingErrorFormatter'
 export { SyntaxErrorFormatter } from './SyntaxErrorFormatter'
 export { TreeFormatter } from './TreeFormatter'
